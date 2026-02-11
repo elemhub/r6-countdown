@@ -1,7 +1,7 @@
 import { NextIntlClientProvider } from 'next-intl';
 import GoogleAdSense from "@/components/GoogleAdSense";
 import { GoogleTagManager } from '@next/third-parties/google';
-import { Analytics } from "@vercel/analytics/react";
+import { Analytics } from "@vercel/analytics/next";
 
 import Header from "@/components/Header";
 import { getMessages, getTranslations } from 'next-intl/server';
