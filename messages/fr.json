@@ -7,7 +7,7 @@
         "status_badge": "Suivi de Saison en Direct",
         "header_prefix": "OPÉRATION",
         "subheader": "Temps restant avant la fin de la saison actuelle",
-        "launches_in": "Operation {name} arrive dans",
+        "launches_in": "La nouvelle saison arrive dans",
         "ends_in": "La saison actuelle se termine dans",
         "ends_in_estimated": "La saison actuelle se termine dans (estimation)"
     },

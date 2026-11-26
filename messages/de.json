@@ -7,7 +7,7 @@
         "status_badge": "Live-Saison-Tracker",
         "header_prefix": "OPERATION",
         "subheader": "Verbleibende Zeit bis zum Ende der aktuellen Saison",
-        "launches_in": "Operation {name} startet in",
+        "launches_in": "Neue Season startet in",
         "ends_in": "Aktuelle Season endet in",
         "ends_in_estimated": "Aktuelle Season endet in (geschätzt)"
     },

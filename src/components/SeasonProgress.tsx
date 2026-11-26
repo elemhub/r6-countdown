@@ -21,12 +21,12 @@ export function SeasonProgress({ startDate, endDate, labels }: SeasonProgressPro
         const end = new Date(endDate).getTime();
         const totalDuration = end - start;
 
-        const interval = setInterval(() => {
-            const now = new Date().getTime();
-            const elapsed = now - start;
-            const percent = Math.min(100, Math.max(0, (elapsed / totalDuration) * 100));
-            setProgress(percent);
-        }, 1000);
+        const update = () => {
+            const elapsed = Date.now() - start;
+            setProgress(Math.min(100, Math.max(0, (elapsed / totalDuration) * 100)));
+        };
+        update();
+        const interval = setInterval(update, 1000);
 
         return () => clearInterval(interval);
     }, [startDate, endDate]);

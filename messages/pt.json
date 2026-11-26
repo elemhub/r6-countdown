@@ -7,7 +7,7 @@
         "status_badge": "Rastreador de Temporada",
         "header_prefix": "OPERAÇÃO",
         "subheader": "Tempo restante até o fim da temporada atual",
-        "launches_in": "Operation {name} chega em",
+        "launches_in": "A nova temporada chega em",
         "ends_in": "A temporada atual termina em",
         "ends_in_estimated": "A temporada atual termina em (estimativa)"
     },
