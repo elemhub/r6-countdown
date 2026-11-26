@@ -30,6 +30,32 @@ export default async function HistoryPage({ params }: { params: Promise<{ locale
                 <section className="mb-16">
                     <h2 className="text-2xl font-bold text-r6-orange mb-6 flex items-center gap-2">
                         <span className="w-2 h-8 bg-r6-orange inline-block rounded-sm"></span>
+                        {t('year_11_title')}
+                    </h2>
+                    <div className="grid md:grid-cols-2 gap-6">
+                        <SeasonCard title={t('y11s4_name')} desc={t('y11s4_desc')} season="Y11S4" />
+                        <SeasonCard title={t('y11s3_name')} desc={t('y11s3_desc')} season="Y11S3" />
+                        <SeasonCard title={t('y11s2_name')} desc={t('y11s2_desc')} season="Y11S2" />
+                        <SeasonCard title={t('y11s1_name')} desc={t('y11s1_desc')} season="Y11S1" />
+                    </div>
+                </section>
+
+                <section className="mb-16">
+                    <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                        <span className="w-2 h-8 bg-white/20 inline-block rounded-sm"></span>
+                        {t('year_10_title')}
+                    </h2>
+                    <div className="grid md:grid-cols-2 gap-6">
+                        <SeasonCard title={t('y10s4_name')} desc={t('y10s4_desc')} season="Y10S4" />
+                        <SeasonCard title={t('y10s3_name')} desc={t('y10s3_desc')} season="Y10S3" />
+                        <SeasonCard title={t('y10s2_name')} desc={t('y10s2_desc')} season="Y10S2" />
+                        <SeasonCard title={t('y10s1_name')} desc={t('y10s1_desc')} season="Y10S1" />
+                    </div>
+                </section>
+
+                <section className="mb-16">
+                    <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                        <span className="w-2 h-8 bg-white/20 inline-block rounded-sm"></span>
                         {t('year_9_title')}
                     </h2>
                     <div className="grid md:grid-cols-2 gap-6">

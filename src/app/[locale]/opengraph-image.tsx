@@ -1,4 +1,5 @@
 import { ImageResponse } from 'next/og';
+import { getSeasonState } from '@/data/seasons';
 
 export const runtime = 'edge';
 
@@ -11,6 +12,14 @@ export const size = {
 export const contentType = 'image/png';
 
 export default async function Image() {
+    // Computed on each request, so the preview card always shows the right season.
+    const season = getSeasonState(Date.now());
+    const headline = season.next.name ? season.next : season.current;
+    const day = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone: 'UTC' }).format(new Date(season.end));
+    const subtitle = season.next.name
+        ? `${headline.code} · Launching ${day}`
+        : `${headline.code} · Ending ${day}${season.endEstimated ? ' (est.)' : ''}`;
+
     // We use a simple system font stack for reliability
     return new ImageResponse(
         (
@@ -70,12 +79,12 @@ export default async function Image() {
                             marginTop: -10,
                         }}
                     >
-                        TENFOLD
+                        {(headline.name ?? headline.code).toUpperCase()}
                     </div>
                 </div>
 
                 <div style={{ marginTop: 40, fontSize: 30, color: '#94a3b8', letterSpacing: 1 }}>
-                    Ending March 3, 2026
+                    {subtitle}
                 </div>
 
                 <div style={{ position: 'absolute', bottom: 40, fontSize: 24, opacity: 0.5 }}>

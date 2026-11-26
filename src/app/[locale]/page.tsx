@@ -1,5 +1,5 @@
-import { Countdown } from "@/components/Countdown";
-import { SeasonProgress } from "@/components/SeasonProgress";
+import { LiveSeasonHero } from "@/components/LiveSeasonHero";
+import { getSeasonState } from "@/data/seasons";
 import { AdPlaceholder } from "@/components/AdPlaceholder";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { RankedChart } from "@/components/RankedChart";
@@ -7,20 +7,20 @@ import { setRequestLocale, getTranslations } from 'next-intl/server';
 import NextImage from 'next/image';
 import { Link } from '@/i18n/routing';
 
-// Season dates
-const SEASON_START = "2025-12-02T14:00:00Z"; // Y10S4 Launch
-const SEASON_END = "2026-03-03T14:00:00Z";   // Y11S1 Approx
+// Season dates live in src/data/seasons.ts (the only place to edit each season).
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
 
   const tHero = await getTranslations({ locale, namespace: 'Hero' });
-  const tProgress = await getTranslations({ locale, namespace: 'Progress' });
-  const tCountdown = await getTranslations({ locale, namespace: 'Countdown' });
   const tArticle = await getTranslations({ locale, namespace: 'Article' });
   const tFAQ = await getTranslations({ locale, namespace: 'FAQ' });
-  const tNextSeason = await getTranslations({ locale, namespace: 'NextSeason' });
+
+  // Build-time snapshot, used for structured data; the hero recomputes it live in the browser.
+  const now = Date.now();
+  const season = getSeasonState(now);
+  const headline = season.next.name ? season.next : season.current;
   const tLatestIntel = await getTranslations({ locale, namespace: 'LatestIntel' });
 
   // JSON-LD Structured Data
@@ -49,8 +49,10 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       },
       {
         "@type": "Event",
-        "name": tHero('header_suffix') + " End Date",
-        "startDate": SEASON_END,
+        "name": season.next.name
+          ? `Rainbow Six Siege ${season.next.code} Operation ${season.next.name} launch`
+          : `Rainbow Six Siege ${season.current.code} Operation ${season.current.name ?? ""} season end`,
+        "startDate": season.end,
         "eventStatus": "https://schema.org/EventScheduled",
         "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
         "location": {
@@ -98,66 +100,10 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           {/* Hero / Countdown Section */}
           <section className="w-full flex flex-col items-center justify-center p-6 lg:py-20 text-center">
 
-            <div className="space-y-6 mb-12">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-r6-orange/30 bg-r6-orange/10 text-r6-orange text-sm font-semibold tracking-wide uppercase shadow-[0_0_20px_rgba(255,85,0,0.15)]">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-r6-orange opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-r6-orange"></span>
-                </span>
-                {tHero('status_badge')}
-              </div>
-
-              <div>
-                <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-white drop-shadow-2xl mb-2">
-                  {tHero('header_prefix')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-r6-orange to-red-500">{tHero('header_suffix')}</span>
-                </h1>
-                <p className="text-xl md:text-2xl text-gray-400 font-light tracking-wide uppercase">
-                  {tHero('subheader')}
-                </p>
-              </div>
-            </div>
-
-            <Countdown
-              targetDate={SEASON_END}
-              className="scale-100 md:scale-110 mb-8"
-              labels={{
-                days: tCountdown('days'),
-                hours: tCountdown('hours'),
-                minutes: tCountdown('minutes'),
-                seconds: tCountdown('seconds'),
-                expired_title: tCountdown('expired_title'),
-                expired_msg: tCountdown('expired_msg'),
-              }}
-            />
-
-            <SeasonProgress
-              startDate={SEASON_START}
-              endDate={SEASON_END}
-              labels={{
-                start: tProgress('start'),
-                complete: tProgress('complete'),
-                end: tProgress('end'),
-              }}
-            />
+            <LiveSeasonHero initialNow={now} />
 
             <div className="w-full max-w-3xl mt-8">
               <AdPlaceholder slot="top-banner" className="h-24 w-full" />
-            </div>
-
-            {/* Next Season Preview Section */}
-            <div className="w-full max-w-2xl mt-12 grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-white/5 border border-white/10 rounded-lg p-4 backdrop-blur-sm">
-                <div className="text-r6-orange text-xs uppercase font-bold mb-1">{tNextSeason('operator_label')}</div>
-                <div className="text-white font-mono text-sm">{tNextSeason('operator_val')}</div>
-              </div>
-              <div className="bg-white/5 border border-white/10 rounded-lg p-4 backdrop-blur-sm">
-                <div className="text-r6-orange text-xs uppercase font-bold mb-1">{tNextSeason('map_label')}</div>
-                <div className="text-white font-mono text-sm">{tNextSeason('map_val')}</div>
-              </div>
-              <div className="bg-white/5 border border-white/10 rounded-lg p-4 backdrop-blur-sm">
-                <div className="text-r6-orange text-xs uppercase font-bold mb-1">{tNextSeason('date_label')}</div>
-                <div className="text-white font-mono text-sm">{tNextSeason('date_val')}</div>
-              </div>
             </div>
 
             {/* Latest Intelligence Grid */}
@@ -168,7 +114,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
               <div className="grid md:grid-cols-3 gap-6">
                 {/* Card 1: Updates */}
                 <Link href="/updates" className="group block bg-black/40 border border-white/10 rounded-xl p-6 hover:bg-white/5 hover:border-r6-orange/50 transition-all text-left">
-                  <div className="text-r6-orange/80 text-xs font-bold uppercase tracking-widest mb-2">Y10S4</div>
+                  <div className="text-r6-orange/80 text-xs font-bold uppercase tracking-widest mb-2">{headline.code}</div>
                   <h3 className="text-lg font-bold text-white mb-2 group-hover:text-r6-orange transition-colors">{tLatestIntel('card_1_title')}</h3>
                   <p className="text-gray-400 text-sm mb-4">{tLatestIntel('card_1_desc')}</p>
                   <div className="flex items-center text-xs font-bold text-white group-hover:translate-x-1 transition-transform">
@@ -178,7 +124,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
                 {/* Card 2: Leaks */}
                 <Link href="/updates" className="group block bg-black/40 border border-white/10 rounded-xl p-6 hover:bg-white/5 hover:border-r6-orange/50 transition-all text-left">
-                  <div className="text-r6-orange/80 text-xs font-bold uppercase tracking-widest mb-2">Y11S1</div>
+                  <div className="text-r6-orange/80 text-xs font-bold uppercase tracking-widest mb-2">YEAR 12</div>
                   <h3 className="text-lg font-bold text-white mb-2 group-hover:text-r6-orange transition-colors">{tLatestIntel('card_2_title')}</h3>
                   <p className="text-gray-400 text-sm mb-4">{tLatestIntel('card_2_desc')}</p>
                   <div className="flex items-center text-xs font-bold text-white group-hover:translate-x-1 transition-transform">
