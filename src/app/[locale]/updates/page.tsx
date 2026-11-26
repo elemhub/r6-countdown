@@ -1,6 +1,6 @@
 import { pageMetadata } from '@/lib/seo';
 import { useTranslations } from 'next-intl';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Analytics } from '@vercel/analytics/react';
 import { AdPlaceholder } from '@/components/AdPlaceholder';
 
@@ -14,8 +14,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 // Update this date whenever the content of this page changes.
 const UPDATED = '2026-11-26';
 
-export default function UpdatesPage() {
-    const t = useTranslations('Updates');
+export default async function UpdatesPage({ params }: { params: Promise<{ locale: string }> }) {
+    const { locale } = await params;
+    setRequestLocale(locale);
+    const t = await getTranslations({ locale, namespace: 'Updates' });
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "Article",

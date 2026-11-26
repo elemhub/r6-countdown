@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { routing } from '@/i18n/routing';
 import { SITE_URL } from '@/lib/seo';
 
-export const revalidate = 86400;
+export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const routes: { path: string; priority: number; changeFrequency: 'daily' | 'weekly' | 'monthly' | 'yearly' }[] = [

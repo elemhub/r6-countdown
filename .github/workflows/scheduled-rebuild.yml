@@ -1,0 +1,22 @@
+# Rebuilds the static site twice a day so server-rendered texts (titles, quick answer,
+# schedule table, structured data, llms.txt) always match the current season.
+# Setup: create a Deploy Hook in Cloudflare Pages (Settings > Builds > Deploy hooks)
+# and save its URL as the repository secret CLOUDFLARE_DEPLOY_HOOK.
+name: Scheduled rebuild
+
+on:
+  schedule:
+    - cron: "0 6 * * *"    # every morning
+    - cron: "30 15 * * *"  # after the usual season launch time (~14:00 UTC)
+  workflow_dispatch: {}
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Cloudflare Pages build
+        env:
+          HOOK: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then echo "CLOUDFLARE_DEPLOY_HOOK secret not set; skipping."; exit 0; fi
+          curl -fsS -X POST "$HOOK"

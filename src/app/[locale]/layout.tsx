@@ -4,7 +4,7 @@ import { GoogleTagManager } from '@next/third-parties/google';
 import { Analytics } from "@vercel/analytics/react";
 
 import Header from "@/components/Header";
-import { getMessages, getTranslations } from 'next-intl/server';
+import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { Geist, Geist_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 import { routing, Link } from '../../i18n/routing';
@@ -36,6 +36,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -53,6 +55,7 @@ export default async function LocaleLayout({
   if (!routing.locales.includes(locale as any)) {
     notFound();
   }
+  setRequestLocale(locale);
 
   // Providing all messages to the client
   // side is the easiest way to get started

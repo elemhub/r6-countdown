@@ -1,8 +1,8 @@
 import { getSchedule, getSeasonState } from '@/data/seasons';
 import { SITE_URL } from '@/lib/seo';
 
-// Regenerated hourly so AI assistants always read the current season.
-export const revalidate = 3600;
+// Generated at build time; the scheduled rebuild keeps it current.
+export const dynamic = 'force-static';
 
 const fmt = (iso: string) =>
     new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone: 'UTC' }).format(new Date(iso));

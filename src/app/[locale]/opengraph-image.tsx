@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 import { getSeasonState } from '@/data/seasons';
 
-export const runtime = 'edge';
+export const dynamic = 'force-static';
 
 // Image metadata
 export const alt = 'Rainbow Six Siege Season Countdown';
@@ -12,7 +12,7 @@ export const size = {
 export const contentType = 'image/png';
 
 export default async function Image() {
-    // Computed on each request, so the preview card always shows the right season.
+    // Computed at build time (refreshed by the scheduled rebuild).
     const season = getSeasonState(Date.now());
     const headline = season.next.name ? season.next : season.current;
     const day = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone: 'UTC' }).format(new Date(season.end));

@@ -1,6 +1,6 @@
 import { pageMetadata } from '@/lib/seo';
 import { useTranslations } from 'next-intl';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params;
@@ -10,6 +10,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function PrivacyPage({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params;
+    setRequestLocale(locale);
 
     return (
         <div className="container mx-auto px-4 py-12 max-w-4xl">

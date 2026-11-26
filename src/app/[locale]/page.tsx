@@ -9,9 +9,8 @@ import { Link } from '@/i18n/routing';
 import { SITE_URL, SITE_NAME, pageMetadata, plainText, formatSeasonDate } from '@/lib/seo';
 
 // Season dates live in src/data/seasons.ts (the only place to edit each season).
-// Regenerate the server HTML every hour so titles, structured data and the
-// schedule table stay current without a redeploy.
-export const revalidate = 3600;
+// The server HTML (titles, structured data, schedule table) is refreshed on every
+// rebuild; a scheduled rebuild keeps it current. The hero is live in the browser.
 
 // FAQ order on the page. q1 is answered with the live "quick answer".
 const FAQ_KEYS = ['q1', 'q5', 'q2', 'q6', 'q3', 'q4'] as const;
