@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server';
-import { getSchedule, getSeasonState } from '@/data/seasons';
+import { getSchedule, getSeasonState, seasonSlug } from '@/data/seasons';
+import { Link } from '@/i18n/routing';
 import { formatSeasonDate } from '@/lib/seo';
 
 /** Builds the one-paragraph "quick answer" (also reused in the FAQ and structured data). */
@@ -69,7 +70,11 @@ export async function SeasonFacts({ locale, now }: { locale: string; now: number
                         {schedule.map((s) => (
                             <tr key={s.code} className={`border-b border-white/5 ${s.status === 'live' ? 'text-white font-semibold' : 'text-gray-300'}`}>
                                 <td className="py-2 pr-4 font-mono">{s.code}</td>
-                                <td className="py-2 pr-4">{s.name ? `Operation ${s.name}` : t('tba')}</td>
+                                <td className="py-2 pr-4">
+                                    <Link href={`/seasons/${seasonSlug(s.code)}`} className="underline decoration-white/20 hover:text-r6-orange hover:decoration-r6-orange">
+                                        {s.name ? `Operation ${s.name}` : t('tba')}
+                                    </Link>
+                                </td>
                                 <td className="py-2 pr-4">
                                     {formatSeasonDate(locale, s.start).date}{s.estimated ? ` (${t('estimated')})` : ''}
                                 </td>

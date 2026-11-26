@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import { routing } from '@/i18n/routing';
 import { SITE_URL } from '@/lib/seo';
+import { getSeasonPages, seasonSlug } from '@/data/seasons';
 
 export const dynamic = 'force-static';
 
@@ -13,6 +14,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { path: '/contact', priority: 0.3, changeFrequency: 'yearly' },
         { path: '/legal/privacy', priority: 0.1, changeFrequency: 'yearly' },
         { path: '/legal/terms', priority: 0.1, changeFrequency: 'yearly' },
+        ...getSeasonPages(Date.now()).map((s) => ({
+            path: `/seasons/${seasonSlug(s.code)}`,
+            priority: s.status === 'past' ? 0.4 : 0.8,
+            changeFrequency: (s.status === 'past' ? 'yearly' : 'daily') as 'yearly' | 'daily',
+        })),
     ];
 
     return routes.flatMap(({ path, priority, changeFrequency }) =>

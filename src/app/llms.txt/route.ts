@@ -1,4 +1,4 @@
-import { getSchedule, getSeasonState } from '@/data/seasons';
+import { getSchedule, getSeasonState, seasonSlug } from '@/data/seasons';
 import { SITE_URL } from '@/lib/seo';
 
 // Generated at build time; the scheduled rebuild keeps it current.
@@ -17,7 +17,7 @@ export function GET() {
     const nxt = `${s.next.code}${s.next.name ? ` (Operation ${s.next.name})` : ''}`;
 
     const rows = schedule
-        .map((r) => `- ${r.code}${r.name ? ` – Operation ${r.name}` : ' – name not announced'}: ${fmt(r.start)}${r.estimated ? ' (estimated)' : ''} to ${fmt(r.end)}${r.endEstimated ? ' (estimated)' : ''} [${r.status}]`)
+        .map((r) => `- [${r.code}${r.name ? ` – Operation ${r.name}` : ' – name not announced'}](${SITE_URL}/en/seasons/${seasonSlug(r.code)}): ${fmt(r.start)}${r.estimated ? ' (estimated)' : ''} to ${fmt(r.end)}${r.endEstimated ? ' (estimated)' : ''} [${r.status}]`)
         .join('\n');
 
     const body = `# R6 Countdown

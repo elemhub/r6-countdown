@@ -2,6 +2,8 @@ import { pageMetadata } from '@/lib/seo';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
 import { AdPlaceholder } from '@/components/AdPlaceholder';
+import { Link } from '@/i18n/routing';
+import { getSeasonPages, seasonSlug } from '@/data/seasons';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
     const { locale } = await params;
@@ -177,9 +179,11 @@ export default async function HistoryPage({ params }: { params: Promise<{ locale
     );
 }
 
+const SEASONS_WITH_PAGE = new Set(getSeasonPages(Date.now()).map((s) => s.code));
+
 function SeasonCard({ title, desc, season }: { title: string, desc: string, season: string }) {
-    return (
-        <div className="group bg-black/40 backdrop-blur-md border border-white/5 rounded-xl p-6 hover:bg-white/5 transition-all duration-300 hover:border-r6-orange/50 relative overflow-hidden">
+    const inner = (
+        <>
             <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
                 <span className="text-6xl font-black text-white">{season}</span>
             </div>
@@ -188,6 +192,10 @@ function SeasonCard({ title, desc, season }: { title: string, desc: string, seas
                 <h3 className="text-xl font-bold text-white mb-2 group-hover:translate-x-1 transition-transform">{title}</h3>
                 <p className="text-gray-400 text-sm">{desc}</p>
             </div>
-        </div>
+        </>
     );
+    const cls = "group block bg-black/40 backdrop-blur-md border border-white/5 rounded-xl p-6 hover:bg-white/5 transition-all duration-300 hover:border-r6-orange/50 relative overflow-hidden";
+    return SEASONS_WITH_PAGE.has(season)
+        ? <Link href={`/seasons/${seasonSlug(season)}`} className={cls}>{inner}</Link>
+        : <div className={cls}>{inner}</div>;
 }

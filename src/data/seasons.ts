@@ -127,3 +127,19 @@ export function getSchedule(now: number = Date.now(), upcoming = 1): ScheduledSe
     const firstOfYear = withEnds.findIndex((s) => s.code.startsWith(`Y${liveYear}S`));
     return withEnds.slice(firstOfYear, liveIdx + 1 + upcoming);
 }
+
+/** Seasons that get their own page: every known season plus the first projected one. */
+export function getSeasonPages(now: number = Date.now()): ScheduledSeason[] {
+    const slots = timeline(now);
+    if (!slots[slots.length - 1].estimated) slots.push(projectAfter(slots[slots.length - 1]));
+    slots.push(projectAfter(slots[slots.length - 1])); // only used to compute the last end
+    return slots.slice(0, -1).map((s, idx) => {
+        const nxt = slots[idx + 1];
+        const startMs = new Date(s.start).getTime();
+        const endMs = new Date(nxt.start).getTime();
+        const status = endMs <= now ? "past" : startMs <= now ? "live" : "upcoming";
+        return { ...s, end: nxt.start, endEstimated: nxt.estimated, status };
+    });
+}
+
+export const seasonSlug = (code: string) => code.toLowerCase();
