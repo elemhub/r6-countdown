@@ -100,3 +100,30 @@ export function getSeasonState(now: number = Date.now()): SeasonState {
     const next = slots[i + 1];
     return { current, next, end: next.start, endEstimated: next.estimated };
 }
+
+export interface ScheduledSeason extends SeasonSlot {
+    end: string;
+    endEstimated: boolean;
+    status: "past" | "live" | "upcoming";
+}
+
+/**
+ * Seasons of the current Siege year plus the following ones up to `upcoming`
+ * seasons after the live one, each with its (possibly estimated) end date.
+ */
+export function getSchedule(now: number = Date.now(), upcoming = 1): ScheduledSeason[] {
+    const slots = timeline(now);
+    // Make sure there are enough future slots to compute ends.
+    for (let k = 0; k < upcoming + 1; k++) slots.push(projectAfter(slots[slots.length - 1]));
+    const withEnds: ScheduledSeason[] = slots.slice(0, -1).map((s, idx) => {
+        const nxt = slots[idx + 1];
+        const startMs = new Date(s.start).getTime();
+        const endMs = new Date(nxt.start).getTime();
+        const status = endMs <= now ? "past" : startMs <= now ? "live" : "upcoming";
+        return { ...s, end: nxt.start, endEstimated: nxt.estimated, status };
+    });
+    const liveIdx = withEnds.findIndex((s) => s.status === "live");
+    const liveYear = /^Y(\d+)/.exec(withEnds[liveIdx].code)?.[1];
+    const firstOfYear = withEnds.findIndex((s) => s.code.startsWith(`Y${liveYear}S`));
+    return withEnds.slice(firstOfYear, liveIdx + 1 + upcoming);
+}

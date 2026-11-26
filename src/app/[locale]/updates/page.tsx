@@ -1,3 +1,4 @@
+import { pageMetadata } from '@/lib/seo';
 import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import { Analytics } from '@vercel/analytics/react';
@@ -7,17 +8,29 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     const { locale } = await params;
     const t = await getTranslations({ locale, namespace: 'Updates' });
 
-    return {
-        title: t('meta_title'),
-        description: t('meta_description'),
-    };
+    return pageMetadata(locale, '/updates', t('meta_title'), t('meta_description'));
 }
+
+// Update this date whenever the content of this page changes.
+const UPDATED = '2026-11-26';
 
 export default function UpdatesPage() {
     const t = useTranslations('Updates');
+    const jsonLd = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": t('section_1_title'),
+        "description": t('section_1_desc'),
+        "datePublished": "2026-11-26",
+        "dateModified": UPDATED,
+        "author": { "@type": "Organization", "name": "R6 Countdown", "url": "https://r6countdown.com" },
+        "publisher": { "@type": "Organization", "name": "R6 Countdown", "url": "https://r6countdown.com" },
+        "about": { "@type": "VideoGame", "name": "Tom Clancy's Rainbow Six Siege" },
+    };
 
     return (
         <main className="flex-grow flex flex-col items-center justify-start p-6 md:p-12 max-w-4xl mx-auto w-full">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
             <h1 className="text-4xl md:text-5xl font-black text-white mb-8 text-center uppercase tracking-tighter">
                 {t('title')}
             </h1>
@@ -128,7 +141,7 @@ export default function UpdatesPage() {
                 </div>
 
                 {/* Section 2: Future Leaks */}
-                <section className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm">
+                <section id="year-12" className="scroll-mt-24 bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm">
                     <div className="flex items-center gap-4 mb-6">
                         <div className="h-2 w-2 bg-purple-500 rounded-full" />
                         <h2 className="text-2xl font-bold text-white uppercase tracking-wide opacity-90">

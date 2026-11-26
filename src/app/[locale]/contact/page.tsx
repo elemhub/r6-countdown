@@ -1,3 +1,4 @@
+import { pageMetadata } from '@/lib/seo';
 import { getTranslations } from 'next-intl/server';
 import { setRequestLocale } from 'next-intl/server';
 
@@ -5,10 +6,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     const { locale } = await params;
     const t = await getTranslations({ locale, namespace: 'Contact' });
 
-    return {
-        title: t('meta_title'),
-        description: t('meta_description'),
-    };
+    return pageMetadata(locale, '/contact', t('meta_title'), t('meta_description'));
 }
 
 export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {

@@ -1,7 +1,8 @@
 {
     "Metadata": {
         "title": "¿Cuándo Termina la Temporada de Rainbow Six Siege? | Cuenta Atrás en Vivo",
-        "description": "Cuenta atrás en directo para Operation Vital Signal (Y11S4) de Rainbow Six Siege, que llega el 1 de diciembre de 2026. Consulta cuándo termina la temporada actual, cuándo empieza la siguiente y la fecha estimada de la Y12S1."
+        "description": "Cuenta atrás en directo para Operation Vital Signal (Y11S4) de Rainbow Six Siege, que llega el 1 de diciembre de 2026. Consulta cuándo termina la temporada actual, cuándo empieza la siguiente y la fecha estimada de la Y12S1.",
+        "title_live": "¿Cuándo termina la temporada de R6 Siege? Cuenta atrás {name} ({code})"
     },
     "Hero": {
         "status_badge": "Rastreador de Temporada en Vivo",
@@ -38,13 +39,16 @@
     "FAQ": {
         "title": "Preguntas Frecuentes",
         "q1": "¿Cuándo termina la temporada actual de Rainbow Six Siege?",
-        "a1": "Operation Split Fire (Y11S3) termina el <strong>1 de diciembre de 2026</strong>, cuando llega Operation Vital Signal (Y11S4). Se espera que Vital Signal termine a <strong>principios de marzo de 2027</strong> (estimado el 2 de marzo de 2027, según el ciclo de 91 días). La cuenta atrás de arriba siempre muestra el tiempo real de la temporada actual.",
         "q2": "¿Qué trae Operation Vital Signal?",
         "a2": "Operation Vital Signal trae un <strong>remaster de Doc</strong>, <strong>Ranked 3.0</strong> con colas separadas Solo/Dúo y Flex, el nuevo subfusil <strong>MBZ-19</strong> para Jäger, Warden y Thunderbird, una actualización de <strong>Bank</strong>, versiones modernizadas de Yacht, Favela y Tower, y eventos temporales como The Grand Larceny.",
         "q3": "¿Se conservan las recompensas del pase de batalla?",
         "a3": "No. El pase de batalla actual termina cuando empieza la nueva temporada, así que <strong>desbloquea tus recompensas pendientes antes de que llegue Operation Vital Signal el 1 de diciembre</strong>. Ubisoft recuerda que la fecha de lanzamiento es también el límite del pase actual.",
         "q4": "¿Hay Cross-Progression?",
-        "a4": "Sí. Tus skins, fama y agentes se comparten entre PC, Xbox y PlayStation si usas la misma cuenta <strong>Ubisoft Connect</strong>. Sin embargo, el rango va separado entre PC y Consola."
+        "a4": "Sí. Tus skins, fama y agentes se comparten entre PC, Xbox y PlayStation si usas la misma cuenta <strong>Ubisoft Connect</strong>. Sin embargo, el rango va separado entre PC y Consola.",
+        "q5": "¿Cuándo empieza la próxima temporada de Rainbow Six Siege?",
+        "a5": "Se espera que la {code}{name, select, none {} other { (Operation {name})}} empiece el {date}. {estimated, select, yes {Es una estimación basada en el ciclo de ~91 días; la actualizamos en cuanto Ubisoft confirme la fecha.} other {Ubisoft ha confirmado el día de lanzamiento; la hora exacta se anuncia poco antes del mantenimiento.}}",
+        "q6": "¿A qué hora sale la nueva temporada de Rainbow Six Siege?",
+        "a6": "Las nuevas temporadas suelen llegar tras un mantenimiento de servidores que empieza sobre las <strong>15:00 en España peninsular (14:00 UTC)</strong>, y en algunas plataformas puede tardar unas horas. Ubisoft confirma la hora exacta en sus canales oficiales poco antes del lanzamiento. La cuenta atrás de esta página muestra las fechas en tu propia zona horaria."
     },
     "NextSeason": {
         "title": "Próxima temporada",
@@ -90,7 +94,7 @@
     "Updates": {
         "meta_title": "Operation Vital Signal (Y11S4): remaster de Doc, Ranked 3.0 y MBZ-19 | R6 Updates",
         "meta_description": "Todo lo que llega con Operation Vital Signal (Y11S4) de Rainbow Six Siege: remaster de Doc, Ranked 3.0 con colas Solo/Dúo y Flex, subfusil MBZ-19, cambios en Bank, mapas modernizados y eventos.",
-        "title": "Novedades de la temporada",
+        "title": "Operation Vital Signal (Y11S4): todos los cambios",
         "section_1_title": "Y11S4 Operation Vital Signal: todos los cambios",
         "section_1_desc": "Operation Vital Signal, la última temporada del Año 11, llega el 1 de diciembre de 2026 (servidor de pruebas desde el 16 de noviembre). Se centra en el juego táctico y en el competitivo. Esto es todo lo que ha anunciado Ubisoft.",
         "change_1_title": "DOC (Remaster)",
@@ -259,5 +263,25 @@
         "y11s4": {
             "highlight": "Remaster de Doc · Ranked 3.0 (Solo/Dúo y Flex)"
         }
+    },
+    "QuickAnswer": {
+        "title": "Respuesta rápida",
+        "updated": "Última actualización: {date}",
+        "launch": "Operation {current} ({currentCode}) termina el {date} hacia las {time} UTC, cuando llega Operation {next} ({nextCode}) a PC, PlayStation y Xbox. Se espera que Operation {next} dure hasta el {nextEnd} aproximadamente (estimado).",
+        "current": "Operation {current} ({currentCode}) es la temporada actual de Rainbow Six Siege. Empezó el {start} y termina el {date}{estimated, select, yes { (estimado, según el ciclo de ~91 días)} other {}}, cuando empieza la {nextCode}."
+    },
+    "Schedule": {
+        "title": "Calendario de temporadas de Rainbow Six Siege",
+        "season": "Temporada",
+        "operation": "Operación",
+        "start": "Inicio",
+        "end": "Fin",
+        "status": "Estado",
+        "past": "Terminada",
+        "live": "En curso",
+        "upcoming": "Próxima",
+        "estimated": "est.",
+        "tba": "Por anunciar",
+        "note": "Fechas en UTC. Las fechas estimadas se calculan con el ciclo de ~91 días de las temporadas y se actualizan en cuanto Ubisoft las confirma."
     }
 }

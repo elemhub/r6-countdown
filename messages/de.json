@@ -1,7 +1,8 @@
 {
     "Metadata": {
         "title": "Wann endet die Rainbow Six Siege Season? | Live-Countdown",
-        "description": "Live-Countdown für Rainbow Six Siege Operation Vital Signal (Y11S4), Start am 1. Dezember 2026. Verfolge das Ende der aktuellen Season, den Start der nächsten und die Schätzung für Jahr 12 Season 1."
+        "description": "Live-Countdown für Rainbow Six Siege Operation Vital Signal (Y11S4), Start am 1. Dezember 2026. Verfolge das Ende der aktuellen Season, den Start der nächsten und die Schätzung für Jahr 12 Season 1.",
+        "title_live": "Wann endet die R6 Siege Season? Countdown {name} ({code})"
     },
     "Hero": {
         "status_badge": "Live-Saison-Tracker",
@@ -38,13 +39,16 @@
     "FAQ": {
         "title": "Häufig gestellte Fragen (FAQ)",
         "q1": "Wann endet die aktuelle Season von Rainbow Six Siege?",
-        "a1": "Operation Split Fire (Y11S3) endet am <strong>1. Dezember 2026</strong> mit dem Start von Operation Vital Signal (Y11S4). Vital Signal endet voraussichtlich <strong>Anfang März 2027</strong> (geschätzt am 2. März 2027, basierend auf dem 91-Tage-Zyklus). Der Countdown oben zeigt immer die Live-Zeit der aktuellen Season.",
         "q2": "Was ist neu in Operation Vital Signal?",
         "a2": "Operation Vital Signal bringt ein <strong>Doc-Remaster</strong>, <strong>Ranked 3.0</strong> mit getrennten Solo/Duo- und Flex-Warteschlangen, die neue MP <strong>MBZ-19</strong> für Jäger, Warden und Thunderbird, ein Update für <strong>Bank</strong>, modernisierte Versionen von Yacht, Favela und Tower sowie zeitlich begrenzte Events wie The Grand Larceny.",
         "q3": "Bleiben Battle-Pass-Belohnungen erhalten?",
         "a3": "Nein. Der aktuelle Battle Pass endet mit dem Start der neuen Season. <strong>Schalte deine restlichen Belohnungen frei, bevor Operation Vital Signal am 1. Dezember startet</strong>. Ubisoft weist darauf hin, dass der Starttermin auch die Frist für den aktuellen Pass ist.",
         "q4": "Gibt es Cross-Progression?",
-        "a4": "Ja. Deine Skins, Ansehen und Operator werden zwischen PC, Xbox und PlayStation geteilt, solange du dasselbe <strong>Ubisoft Connect</strong>-Konto verwendest. Der Rang ist jedoch zwischen PC und Konsole getrennt."
+        "a4": "Ja. Deine Skins, Ansehen und Operator werden zwischen PC, Xbox und PlayStation geteilt, solange du dasselbe <strong>Ubisoft Connect</strong>-Konto verwendest. Der Rang ist jedoch zwischen PC und Konsole getrennt.",
+        "q5": "Wann beginnt die nächste Season von Rainbow Six Siege?",
+        "a5": "{code}{name, select, none {} other { (Operation {name})}} startet voraussichtlich am {date}. {estimated, select, yes {Das ist eine Schätzung auf Basis des ca. 91-Tage-Zyklus; wir aktualisieren sie, sobald Ubisoft das Datum bestätigt.} other {Ubisoft hat den Starttag bestätigt; die genaue Uhrzeit wird kurz vor der Wartung bekanntgegeben.}}",
+        "q6": "Um wie viel Uhr startet die neue Season von Rainbow Six Siege?",
+        "a6": "Neue Seasons starten meist nach einer Serverwartung, die gegen <strong>15:00 Uhr MEZ (14:00 UTC)</strong> beginnt; auf manchen Plattformen kann es einige Stunden dauern. Ubisoft bestätigt die genaue Uhrzeit kurz vor dem Start auf seinen offiziellen Kanälen. Der Countdown auf dieser Seite zeigt die Daten in deiner eigenen Zeitzone."
     },
     "NextSeason": {
         "title": "Nächste Season",
@@ -90,7 +94,7 @@
     "Updates": {
         "meta_title": "Operation Vital Signal (Y11S4): Doc-Remaster, Ranked 3.0 & MBZ-19 | R6 Updates",
         "meta_description": "Alles zu Rainbow Six Siege Operation Vital Signal (Y11S4): Doc-Remaster, Ranked 3.0 mit Solo/Duo- und Flex-Warteschlangen, MBZ-19, Bank-Update, modernisierte Karten und Events.",
-        "title": "Season-Updates & Infos",
+        "title": "Operation Vital Signal (Y11S4): Alle Änderungen",
         "section_1_title": "Y11S4 Operation Vital Signal: Alle Änderungen",
         "section_1_desc": "Operation Vital Signal, die letzte Season von Jahr 11, startet am 1. Dezember 2026 (Testserver ab 16. November). Im Fokus stehen taktisches Gameplay und das kompetitive Spiel. Hier ist alles, was Ubisoft angekündigt hat.",
         "change_1_title": "DOC (Remaster)",
@@ -259,5 +263,25 @@
         "y11s4": {
             "highlight": "Doc-Remaster · Ranked 3.0 (Solo/Duo & Flex)"
         }
+    },
+    "QuickAnswer": {
+        "title": "Kurze Antwort",
+        "updated": "Zuletzt aktualisiert: {date}",
+        "launch": "Operation {current} ({currentCode}) endet am {date} gegen {time} UTC, wenn Operation {next} ({nextCode}) auf PC, PlayStation und Xbox startet. Operation {next} läuft voraussichtlich bis etwa {nextEnd} (geschätzt).",
+        "current": "Operation {current} ({currentCode}) ist die aktuelle Season von Rainbow Six Siege. Sie hat am {start} begonnen und endet am {date}{estimated, select, yes { (geschätzt, basierend auf dem ca. 91-Tage-Zyklus)} other {}}, wenn {nextCode} beginnt."
+    },
+    "Schedule": {
+        "title": "Rainbow Six Siege Season-Kalender",
+        "season": "Season",
+        "operation": "Operation",
+        "start": "Start",
+        "end": "Ende",
+        "status": "Status",
+        "past": "Beendet",
+        "live": "Läuft",
+        "upcoming": "Demnächst",
+        "estimated": "gesch.",
+        "tba": "Noch nicht angekündigt",
+        "note": "Daten in UTC. Geschätzte Daten basieren auf dem ca. 91-tägigen Season-Zyklus und werden aktualisiert, sobald Ubisoft sie bestätigt."
     }
 }

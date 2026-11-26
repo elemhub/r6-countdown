@@ -32,16 +32,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: t('description'),
     keywords: ["Rainbow Six Siege", "R6 Countdown", "Season End Date", "R6 Timer", "Rainbow 6 Season"],
     metadataBase: new URL('https://r6countdown.com'),
-    alternates: {
-      canonical: '/',
-      languages: {
-        'en': '/en',
-        'es': '/es',
-        'fr': '/fr',
-        'de': '/de',
-        'pt': '/pt',
-      },
-    },
+    openGraph: { siteName: 'R6 Countdown', type: 'website' },
   };
 }
 

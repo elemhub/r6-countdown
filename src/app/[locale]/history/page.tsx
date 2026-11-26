@@ -1,3 +1,4 @@
+import { pageMetadata } from '@/lib/seo';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
 import { AdPlaceholder } from '@/components/AdPlaceholder';
@@ -6,10 +7,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     const { locale } = await params;
     const t = await getTranslations({ locale, namespace: 'History' });
 
-    return {
-        title: t('meta_title'),
-        description: t('meta_description'),
-    };
+    return pageMetadata(locale, '/history', t('meta_title'), t('meta_description'));
 }
 
 export default async function HistoryPage({ params }: { params: Promise<{ locale: string }> }) {

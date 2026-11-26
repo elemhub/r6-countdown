@@ -1,9 +1,9 @@
+import { pageMetadata } from '@/lib/seo';
 import { getTranslations } from 'next-intl/server';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
-    return {
-        title: `Terms of Service - R6 Countdown`,
-    };
+    const { locale } = await params;
+    return pageMetadata(locale, '/legal/terms', 'Terms of Service - R6 Countdown', 'Terms of service of R6 Countdown, the live Rainbow Six Siege season tracker.');
 }
 
 export default async function TermsPage({ params }: { params: Promise<{ locale: string }> }) {

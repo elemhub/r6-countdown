@@ -1,15 +1,14 @@
 import { MetadataRoute } from 'next';
+import { SITE_URL } from '@/lib/seo';
 
 export default function robots(): MetadataRoute.Robots {
-    // TODO: Replace with your actual domain
-    const baseUrl = 'https://r6countdown.com';
-
     return {
-        rules: {
-            userAgent: '*',
-            allow: '/',
-            disallow: ['/private/'],
-        },
-        sitemap: `${baseUrl}/sitemap.xml`,
+        rules: [
+            { userAgent: '*', allow: '/', disallow: ['/private/'] },
+            // Explicitly welcome AI search crawlers so the site can be cited in AI answers.
+            { userAgent: ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'PerplexityBot', 'Google-Extended', 'Applebot-Extended'], allow: '/' },
+        ],
+        sitemap: `${SITE_URL}/sitemap.xml`,
+        host: SITE_URL,
     };
 }

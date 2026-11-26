@@ -1,12 +1,11 @@
+import { pageMetadata } from '@/lib/seo';
 import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params;
     const t = await getTranslations({ locale, namespace: 'Metadata' });
-    return {
-        title: `Privacy Policy - R6 Countdown`,
-    };
+    return pageMetadata(locale, '/legal/privacy', 'Privacy Policy - R6 Countdown', 'Privacy policy of R6 Countdown, the live Rainbow Six Siege season tracker.');
 }
 
 export default async function PrivacyPage({ params }: { params: Promise<{ locale: string }> }) {

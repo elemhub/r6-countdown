@@ -68,6 +68,9 @@ export function LiveSeasonHero({ initialNow }: { initialNow: number }) {
 
                 <div>
                     <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-white drop-shadow-2xl mb-2 uppercase">
+                        <span className="block text-base md:text-xl font-semibold tracking-[0.3em] text-gray-400 mb-3">
+                            Rainbow Six Siege
+                        </span>
                         {t("header_prefix")}{" "}
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-r6-orange to-red-500">
                             {headline.name ?? headline.code}
