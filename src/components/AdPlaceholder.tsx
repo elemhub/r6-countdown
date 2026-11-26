@@ -32,7 +32,7 @@ export function AdPlaceholder({
     }
 
     return (
-        <div className={`relative w-full overflow-hidden min-h-[100px] flex items-center justify-center ${className}`}>
+        <div className={`ad-slot relative w-full overflow-hidden min-h-[100px] flex items-center justify-center ${className}`}>
             <ins className="adsbygoogle"
                 style={{ display: 'block', width: '100%' }}
                 data-ad-client={process.env.NEXT_PUBLIC_ADSENSE_ID}

@@ -138,16 +138,16 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <div className="flex-1 flex flex-col items-center">
 
           {/* Hero / Countdown Section */}
-          <section className="w-full flex flex-col items-center justify-center p-6 lg:py-20 text-center">
+          <section className="w-full flex flex-col items-center justify-center p-6 pb-0 lg:pt-20 lg:pb-0 text-center">
 
             <LiveSeasonHero initialNow={now} />
 
             <div className="w-full max-w-3xl mt-8">
-              <AdPlaceholder slot="top-banner" className="h-24 w-full" />
+              <AdPlaceholder slot="top-banner" className="w-full" />
             </div>
 
             {/* Latest Intelligence Grid */}
-            <div className="w-full max-w-5xl mt-16">
+            <div className="w-full max-w-5xl mt-10">
               <h2 className="text-2xl font-bold text-white mb-6 text-left border-l-4 border-r6-orange pl-4">
                 {tLatestIntel('title')}
               </h2>
@@ -190,7 +190,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           </section>
 
           {/* SEO Article Section */}
-          <section className="w-full max-w-4xl bg-black/40 backdrop-blur-sm border border-white/5 rounded-2xl p-8 md:p-12 mt-8">
+          <section className="w-full max-w-4xl bg-black/40 backdrop-blur-sm border border-white/5 rounded-2xl p-8 md:p-12 mt-8 mb-8">
             <article className="prose prose-invert prose-lg max-w-none">
               <h2 className="text-3xl font-bold text-white mb-6 border-l-4 border-r6-orange pl-4">{tArticle('title')}</h2>
 

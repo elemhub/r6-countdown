@@ -55,3 +55,7 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--r6-orange);
 }
+/* Collapse ad slots that AdSense could not fill, so they never leave empty gaps. */
+.ad-slot:has(ins.adsbygoogle[data-ad-status="unfilled"]) {
+  display: none;
+}
