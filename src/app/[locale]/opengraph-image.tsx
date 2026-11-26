@@ -1,7 +1,12 @@
 import { ImageResponse } from 'next/og';
 import { getSeasonState } from '@/data/seasons';
+import { routing } from '@/i18n/routing';
 
 export const dynamic = 'force-static';
+
+export function generateStaticParams() {
+    return routing.locales.map((locale) => ({ locale }));
+}
 
 // Image metadata
 export const alt = 'Rainbow Six Siege Season Countdown';
